@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Person search script</title>
 </head>
 <body>
 
 <form>
-    <label>Wyszukiwanie osób: </label>
+    <h4>Wyszukiwanie osób</h4>
+    <label>Wpisz imię: </label>
     <input type="text" onkeyup="sugest(this.value)">
     <p>Pasujące wyniki: <span id="output"></span></p>
 </form>
@@ -27,14 +28,14 @@
             //ajax reqest
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
-                if(this.readyState == 4 && this.status == 200) {
-                    //jeżeli jest odpowiedź - wypisanie odpowiedzi otrzymanej przez ajax
+                if(this.readyState == 4 && this.status == 200) { // jeżeli odpowiedź jest gotowa - wypisanie odpowiedzi otrzymanej przez ajax
                     document.getElementById('output').innerHTML = this.responseText;
+                } else {
+                //jeśli nie ma odpowiedzi wysłanie zapytania ajax do sktyptu php w drugim pliku
+                xmlhttp.open("GET", "search.php?query="+string, true);
+                xmlhttp.send();
                 }
             }
-            //wysłanie zapytania ajax do sktyptu php w drugim pliku
-            xmlhttp.open("GET", "ajax2.php?query="+string, true);
-            xmlhttp.send();
         }
     }
 </script>

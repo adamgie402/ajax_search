@@ -14,6 +14,6 @@ $customer[] = "Sabina";
 $customer[] = "Sylwia";
 
 $response = '';
-$query = htmlspecialchars(trim($_REQUEST['query'])); // zapytanie przekazane metodą GET
+$query = htmlspecialchars(trim($_REQUEST['query'])); // $_REQUEST - zapytanie może być przekazane metodą GET i POST
 
 ?>
