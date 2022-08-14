@@ -18,23 +18,22 @@
 <script>
     function sugest(string) {
         
-        // document.getElementById('sugest-output').innerHTML = string;
-        // console.log(string);
-
         if(string.lenght == 0) {            
             document.getElementById('output').innerHTML = "";
 
         } else {
             //ajax reqest
             var xmlhttp = new XMLHttpRequest();
+
+            //wysłanie zapytania (zmienna string) ajax do sktyptu php w drugim pliku
+            xmlhttp.open("GET", "search.php?query="+string, true);
+            xmlhttp.send();
+            
+            // zwracanie odpowiedzi 
             xmlhttp.onreadystatechange = function() {
                 if(this.readyState == 4 && this.status == 200) { // jeżeli odpowiedź jest gotowa - wypisanie odpowiedzi otrzymanej przez ajax
                     document.getElementById('output').innerHTML = this.responseText;
-                } else {
-                //jeśli nie ma odpowiedzi wysłanie zapytania ajax do sktyptu php w drugim pliku
-                xmlhttp.open("GET", "search.php?query="+string, true);
-                xmlhttp.send();
-                }
+                } 
             }
         }
     }
