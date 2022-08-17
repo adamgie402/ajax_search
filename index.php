@@ -25,13 +25,13 @@
             //ajax reqest
             var xmlhttp = new XMLHttpRequest();
 
-            //wysłanie zapytania (zmienna string) ajax do sktyptu php w drugim pliku
+            // ajax request (string var.) to php script located in second file
             xmlhttp.open("GET", "search.php?query="+string, true);
             xmlhttp.send();
             
-            // zwracanie odpowiedzi 
+            // ajax response handling
             xmlhttp.onreadystatechange = function() {
-                if(this.readyState == 4 && this.status == 200) { // jeżeli odpowiedź jest gotowa - wypisanie odpowiedzi otrzymanej przez ajax
+                if(this.readyState == 4 && this.status == 200) { // if response is ready
                     document.getElementById('output').innerHTML = this.responseText;
                 } 
             }

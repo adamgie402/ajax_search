@@ -16,34 +16,33 @@ $customer[] = "Anastazja";
 $customer[] = "Alfred";
 
 $response = '';
-$query = htmlspecialchars(trim($_REQUEST['query'])); // $_REQUEST - zapytanie może być przekazane metodą GET i POST
+$query = htmlspecialchars(trim($_REQUEST['query'])); // $_REQUEST - query could be send by GET or POST method
 
 if ($query !== '') {
 
-    $query = strtolower($query); // zamiana na małe znaki
-    $query_len = strlen($query); // ilość znaków zapytania q
+    $query = strtolower($query); 
+    $query_len = strlen($query); 
 
-    foreach($customer as $data) { // pętla - dla każdego wpisu z tablicy
+    foreach($customer as $data) { // loop through $customer array
         
-        //fragment danych od początku ciągu o długości takiej jak bieżące zapytanie q
+        // part of data from string begining & with lenght equal to current query
         $data_portion = substr($data, 0, $query_len);
         
-        if(stristr($query, $data_portion)) { // jeśli występuje ciąg $data_portion w ciągu $query wykonuj dalej
+        if(stristr($query, $data_portion)) { // if string $data_portion is present in string $query
             
-            if($response === '') { // jeśli $response była wcześniej pusta to wpisz dane wiersza
+            if($response === '') { 
                 
                 $response = $data;
 
-            } else { // jeśli w $response są już jakieś dane, to dpoisz kolejne po przecinku
+            } else { // if $response is not empty, add next values from loop
                 
                 $response .= ", " . $data;
-            
             }
         }
     }
 }
 
-// zwracanie zmiennej z danymi
+// returning variable with data
 echo $response === '' ? "brak danych" : $response;
 
 ?>
